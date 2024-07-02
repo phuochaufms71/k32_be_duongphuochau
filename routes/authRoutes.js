@@ -8,4 +8,4 @@ router.post('/register', register)
 router.post('/login', login)
 router.post('/logout', auth, logout)
 
-export { router as userRoutes }
+export { router as authRoutes }
