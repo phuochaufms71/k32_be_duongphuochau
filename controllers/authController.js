@@ -12,7 +12,7 @@ const generateAccessToken = (user) => {
 const register = async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
-    handleResponseError(res, 400, "Bad request. All field are required")
+    handleResponseError(res, 400, "Bad request. All fields are required")
     return
   }
   const existedEmail = await Users.findOne(email)
@@ -33,7 +33,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
-    handleResponseError(res, 400, "Bad request. All field are required")
+    handleResponseError(res, 400, "Bad request. All fields are required")
     return
   }
   const checkEmailUser = await Users.findOne(email)
