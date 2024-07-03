@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { handleResponseError, handleResponseSuccess } from "../utils/responses.js";
 
 const generateAccessToken = (user) => {
-  return jwt.sign({ ...user }, process.env.ACCESS_TOKEN_SECRET_KEY, {
+  return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET_KEY, {
     expiresIn: '1d'
   })
 }
@@ -15,7 +15,7 @@ const register = async (req, res) => {
     handleResponseError(res, 400, "Bad request. All fields are required")
     return
   }
-  const existedEmail = await Users.findOne(email)
+  const existedEmail = await Users.findOne({email})
   if (existedEmail) {
     handleResponseError(res, 400, "Email has already existed")
     return
@@ -36,7 +36,7 @@ const login = async (req, res) => {
     handleResponseError(res, 400, "Bad request. All fields are required")
     return
   }
-  const checkEmailUser = await Users.findOne(email)
+  const checkEmailUser = await Users.findOne({email})
   console.log("checkEmailUser", checkEmailUser)
   if (!checkEmailUser) {
     handleResponseError(res, 401, "Email is incorrect")
@@ -48,6 +48,7 @@ const login = async (req, res) => {
     return
   }
   const accessToken = generateAccessToken(checkEmailUser)
+  console.log("accessToken", accessToken)
   handleResponseSuccess(res, 200, "Login successfully", {
     email,
     role: checkEmailUser?.role,
