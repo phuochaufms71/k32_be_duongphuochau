@@ -10,12 +10,12 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/movies', movieRoutes);
+app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/movies', movieRoutes)
 
 mongoose.connect(process.env.DB_URI, { dbName: 'demo_db' })
     .then(res => {
-        app.listen(process.env.POST, () => {
+        app.listen(process.env.PORT, () => {
             console.log(`Running server on port ${process.env.PORT}`)
         })
     })

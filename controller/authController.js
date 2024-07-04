@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { handleResponseError, handleResponseSuccess } from "../utils/responses.js";
 
 const generateAccessToken = (user) => {
-  return jwt.sign({ user } , process.env.ACCESS_TOKEN_SECRET_KEY, {
+  return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET_KEY, {
     expiresIn: '1d'
   })
 }
@@ -48,6 +48,7 @@ const login = async (req, res) => {
     return
   }
   const accessToken = generateAccessToken(checkEmailUser)
+  console.log("accessToken", accessToken)
   handleResponseSuccess(res, 200, "Login successfully", {
     email,
     role: checkEmailUser?.role,

@@ -37,7 +37,8 @@ const createNewMovie = async (req, res) => {
     return
   }
   const newMovie = await Movies.create({ title, year, poster })
-  handleResponseSuccess(res, 201, "Create new movie successfully", {...newMovie})
+  console.log("newMovie", {...newMovie})
+  handleResponseSuccess(res, 201, "Create new movie successfully", {...newMovie._doc})
 }
 
 const updateMovie = async (req, res) => {
@@ -58,7 +59,7 @@ const updateMovie = async (req, res) => {
     return
   }
   await checkMovieInDb.updateOne({ title, year, poster })
-  handleResponseSuccess(res, 200, "Update movie successfully", {...checkMovieInDb})
+  handleResponseSuccess(res, 200, "Update movie successfully", {...checkMovieInDb._doc})
 }
 
 const deleteMovie = async (req, res) => {
