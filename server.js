@@ -11,13 +11,12 @@ app.use(express.json());
 dotenv.config();
 
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/movie', movieRoutes);
+app.use('/api/v1/movies', movieRoutes);
 
 mongoose.connect(process.env.DB_URI, { dbName: 'demo_db' })
     .then(res => {
-        console.log(res)
         app.listen(process.env.POST, () => {
-            console.log(`Running server on port ${process.env.POST}`)
+            console.log(`Running server on port ${process.env.PORT}`)
         })
     })
     .catch((err) => {
