@@ -1,5 +1,5 @@
-import  jwt  from "jsonwebtoken";
-import { handleResponseError } from "../utils/response.js";
+import jwt from "jsonwebtoken";
+import { handleResponseError } from "../utils/responses.js";
 
 export const auth = (req, res, next) => {
     const { authorization } = req.headers;
@@ -7,7 +7,7 @@ export const auth = (req, res, next) => {
         handleResponseError(res, 401, "Invalid authorization")
         return
     }
-    const accessToken = authorization.split(" ")[1];
+    const accessToken = authorization.split(' ')[1];
     if (!accessToken) {
         handleResponseError(res, 401, "Invalid access token")
         return
@@ -27,7 +27,7 @@ export const authAdmin = (req, res, next) => {
     const accessToken = authorization.split(" ")[1];
     const { user } = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET_KEY);
     if (user.role !== "admin") {
-        handleResponseError(res, 404, "Forbidden")
+        handleResponseError(res, 403, "Forbidden")
         return
     }
     next()

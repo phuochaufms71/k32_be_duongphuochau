@@ -57,7 +57,7 @@ const login = async (req, res) => {
 } 
 
 const logout = (req, res) => {
-  handleResponseSuccess(res, 200, "Logout")
+  handleResponseSuccess(res, 200, "Logout successfully")
 }
 
 export { register, login, logout}
